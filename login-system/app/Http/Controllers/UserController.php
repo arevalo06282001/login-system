@@ -80,7 +80,7 @@ class UserController extends Controller
     {
         // Find the user or throw a 404 if not found
         $user = User::findOrFail($id);
-        return view('edit', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
