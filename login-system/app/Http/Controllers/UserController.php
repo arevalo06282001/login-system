@@ -23,9 +23,8 @@ class UserController extends Controller
             'password' => 'required|string|min:6',
         ]);
 
-        // Try to log the user in with the provided credentials
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
-            // Regenerate the session to prevent session fixation attacks
+            
             $request->session()->regenerate();
             return redirect()->route('dashboard');
         }
@@ -43,7 +42,7 @@ class UserController extends Controller
 
     public function register(Request $request)
     {
-        // Validate the user input before creating a new account
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
@@ -63,7 +62,7 @@ class UserController extends Controller
 
             return redirect()->route('dashboard')->with('success', 'Account created successfully.');
         } catch (\Throwable $e) {
-            // Log the error for debugging but show a safe message to the user
+           
             Log::error('Registration failed', ['error' => $e->getMessage()]);
             return back()->with('error', 'Something went wrong. Please try again.');
         }
@@ -96,7 +95,7 @@ class UserController extends Controller
         ]);
 
         try {
-            // Update the fields
+            
             $user->name = strip_tags($request->name);
             $user->email = filter_var($request->email, FILTER_SANITIZE_EMAIL);
 
@@ -116,7 +115,7 @@ class UserController extends Controller
 
     public function store(Request $request)
 {
-    // Validate the input
+    
     $request->validate([
         'name' => 'required|string|max:255',
         'email' => 'required|email|unique:users',
@@ -124,7 +123,7 @@ class UserController extends Controller
     ]);
 
     try {
-        // Create the user
+        
         User::create([
             'name' => strip_tags($request->name),
             'email' => filter_var($request->email, FILTER_SANITIZE_EMAIL),
