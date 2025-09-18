@@ -6,11 +6,11 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'Login System')</title>
     
-    <!-- Bootstrap 5 CSS -->
+    <!-- Bootstrap css -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
     
-    <!-- Custom CSS -->
+    <!-- Custom css sourced from web -->
     <style>
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -47,7 +47,7 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Bar (only show when authenticated) -->
+    <!-- navbar -->
     @auth
     <nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
         <div class="container">
@@ -96,7 +96,6 @@
     </nav>
     @endauth
 
-    <!-- Main Content -->
     <main>
         <!-- Flash Messages -->
         @if(session('success'))
@@ -120,15 +119,12 @@
         @yield('content')
     </main>
 
-    <!-- Bootstrap 5 JS -->
+    <!-- Bootstrap 5 js -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     
-    <!-- CSRF Token for AJAX requests -->
+    <!-- CSRF Token for ajax requests -->
     <script>
-        // Set up CSRF token for all AJAX requests
         const token = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-        
-        // Delete confirmation function
         function confirmDelete(userId, userName) {
             if (confirm(`Are you sure you want to delete user "${userName}"? This action cannot be undone.`)) {
                 document.getElementById('delete-form-' + userId).submit();
@@ -158,4 +154,5 @@
     
     @yield('scripts')
 </body>
+
 </html>
